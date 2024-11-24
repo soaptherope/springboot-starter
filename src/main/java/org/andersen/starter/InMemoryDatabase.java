@@ -8,25 +8,25 @@ import java.util.Map;
 @Service
 public class InMemoryDatabase {
 
-    private final Map<String, Object> database = new HashMap<>();
+    private final Map<Long, Object> database = new HashMap<>();
 
-    public void put(String key, Object value) {
+    public void put(Long key, Object value) {
         database.put(key, value);
     }
 
-    public Object get(String key) {
+    public Object get(Long key) {
         return database.get(key);
     }
 
-    public void remove(String key) {
+    public void remove(Long key) {
         database.remove(key);
     }
 
-    public boolean containsKey(String key) {
+    public boolean containsKey(Long key) {
         return database.containsKey(key);
     }
 
-    public Map<String, Object> getAll() {
+    public Map<Long, Object> getAll() {
         return new HashMap<>(database);
     }
 }
