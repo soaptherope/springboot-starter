@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class MapDatabaseConfiguration {
 
     @Bean
-    public InMemoryDatabase inMemoryDatabase() {
-        return new InMemoryDatabase();
+    public InMemoryDatabase inMemoryDatabase(KeyGenerator keyGenerator) {
+        return new InMemoryDatabase(keyGenerator);
     }
 }

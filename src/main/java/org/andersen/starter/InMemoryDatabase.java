@@ -4,14 +4,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class InMemoryDatabase {
 
-    private final Map<Long, Object> database = new HashMap<>();
+    private final Map<Long, Object> database = new ConcurrentHashMap<>();
 
-    public void put(Long key, Object value) {
+    private final KeyGenerator keyGenerator;
+
+    public InMemoryDatabase(KeyGenerator keyGenerator) {
+        this.keyGenerator = keyGenerator;
+    }
+
+    public Long put(Object value) {
+        Long key = keyGenerator.generateKey();
         database.put(key, value);
+        return key;
     }
 
     public Object get(Long key) {
@@ -27,6 +36,6 @@ public class InMemoryDatabase {
     }
 
     public Map<Long, Object> getAll() {
-        return new HashMap<>(database);
+        return new ConcurrentHashMap<>(database);
     }
 }
